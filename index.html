@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CROC – Creative Retail & Operation Construction</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --green-dark: #3a4a28;
+      --green-mid: #4d6233;
+      --green-light: #6a8044;
+      --cream: #f5f0e8;
+      --warm-white: #faf8f4;
+      --charcoal: #1a1f14;
+      --accent: #c8b560;
+      --accent-light: #e8d898;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--charcoal);
+      color: var(--cream);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ─────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 4rem;
+      background: rgba(26,31,20,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(200,181,96,0.2);
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--cream);
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      transition: opacity 0.2s, color 0.2s;
+    }
+    .nav-links a:hover { opacity: 1; color: var(--accent); }
+
+    /* ── HERO ────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+    }
+    .hero-left {
+      background: var(--green-dark);
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+      padding: 7rem 4rem 5rem;
+      position: relative;
+    }
+    .hero-left::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 8vw, 7.5rem);
+      line-height: 0.92;
+      color: var(--cream);
+      margin-bottom: 2rem;
+    }
+    .hero-title span { color: var(--accent); display: block; }
+    .hero-desc {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: rgba(245,240,232,0.65);
+      max-width: 36ch;
+      margin-bottom: 3rem;
+    }
+    .hero-cta {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      transition: background 0.3s, color 0.3s;
+    }
+    .hero-cta:hover { background: var(--accent); color: var(--charcoal); }
+    .hero-right {
+      background: var(--charcoal);
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 7rem 5rem;
+      border-left: 1px solid rgba(200,181,96,0.15);
+    }
+    .hero-stat-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+    }
+    .stat-item {}
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 4rem;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.45);
+      margin-top: 0.4rem;
+    }
+    .hero-divider {
+      width: 2px; height: 80px;
+      background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+      margin: 3.5rem 0;
+    }
+    .hero-location {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      color: rgba(245,240,232,0.4);
+    }
+    .hero-location strong { color: var(--cream); display: block; margin-top: 0.3rem; font-weight: 400; }
+
+    /* ── SECTION COMMONS ──────────────────────── */
+    section { position: relative; }
+    .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 5vw, 5.5rem);
+      line-height: 0.95;
+      color: var(--cream);
+    }
+
+    /* ── ABOUT ───────────────────────────────── */
+    #about {
+      display: grid; grid-template-columns: 1fr 1fr;
+      min-height: 80vh;
+    }
+    .about-image-side {
+      background: var(--green-dark);
+      display: flex; align-items: center; justify-content: center;
+      padding: 6rem;
+      position: relative; overflow: hidden;
+    }
+    .about-big-letter {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28vw;
+      color: rgba(200,181,96,0.06);
+      position: absolute;
+      line-height: 1;
+      user-select: none;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .about-card {
+      background: var(--green-mid);
+      padding: 3.5rem;
+      max-width: 320px;
+      position: relative; z-index: 1;
+      border-left: 3px solid var(--accent);
+    }
+    .about-card p {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: 1.2rem;
+      line-height: 1.6;
+      color: var(--cream);
+    }
+    .about-card .year {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 5rem;
+      color: var(--accent);
+      opacity: 0.4;
+      line-height: 1;
+      margin-top: 1.5rem;
+    }
+    .about-text-side {
+      background: var(--charcoal);
+      padding: 6rem 5rem;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .about-text-side p {
+      font-size: 1rem;
+      line-height: 1.9;
+      color: rgba(245,240,232,0.7);
+      margin-top: 2.5rem;
+    }
+
+    /* ── MISSION / VISION ─────────────────────── */
+    #mission {
+      background: var(--green-dark);
+      padding: 8rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+    }
+    .mv-card {}
+    .mv-card .section-title { margin: 1rem 0 2rem; }
+    .mv-card p {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: rgba(245,240,232,0.65);
+    }
+    .mv-separator {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(to right, var(--accent), transparent);
+      margin-top: 3rem;
+    }
+
+    /* ── OBJECTIVES ──────────────────────────── */
+    #objectives {
+      background: var(--charcoal);
+      padding: 8rem 4rem;
+    }
+    .obj-header {
+      display: flex; align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 5rem;
+      border-bottom: 1px solid rgba(200,181,96,0.2);
+      padding-bottom: 3rem;
+    }
+    .obj-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+    }
+    .obj-item {
+      background: #1e2418;
+      padding: 2.5rem;
+      border-top: 2px solid transparent;
+      transition: border-color 0.3s, background 0.3s;
+      cursor: default;
+    }
+    .obj-item:hover {
+      border-top-color: var(--accent);
+      background: #252b1c;
+    }
+    .obj-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.5rem;
+      color: rgba(200,181,96,0.2);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+    .obj-title {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .obj-text {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: rgba(245,240,232,0.55);
+    }
+
+    /* ── TEAM ─────────────────────────────────── */
+    #team {
+      background: var(--green-dark);
+      padding: 8rem 4rem;
+    }
+    .team-header {
+      margin-bottom: 5rem;
+    }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 2px;
+    }
+    .team-member {
+      background: rgba(0,0,0,0.25);
+      padding: 2.5rem 2rem;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .team-member:hover {
+      border-bottom-color: var(--accent);
+      background: rgba(0,0,0,0.4);
+    }
+    .member-avatar {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: var(--green-mid);
+      border: 1.5px solid var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+    .member-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.05rem;
+      color: var(--cream);
+      margin-bottom: 0.4rem;
+    }
+    .member-role {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(200,181,96,0.7);
+    }
+
+    /* ── CONTACT ─────────────────────────────── */
+    #contact {
+      background: var(--charcoal);
+      padding: 8rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+    }
+    .contact-left .section-title { margin: 1rem 0 3rem; }
+    .contact-item {
+      margin-bottom: 2.5rem;
+    }
+    .contact-item-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+    .contact-item-val {
+      font-size: 0.9rem;
+      color: rgba(245,240,232,0.7);
+      line-height: 1.7;
+    }
+    .contact-item-val a {
+      color: rgba(245,240,232,0.7);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-item-val a:hover { color: var(--accent); }
+
+    .contact-right {
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .phones-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .phone-card {
+      background: #1e2418;
+      padding: 1.5rem;
+      border-left: 2px solid var(--accent);
+    }
+    .phone-card .phone-dept {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .phone-card .phone-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.05em;
+      color: var(--cream);
+    }
+
+    /* ── FOOTER ───────────────────────────────── */
+    footer {
+      background: var(--green-dark);
+      padding: 3rem 4rem;
+      display: flex; align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(200,181,96,0.2);
+    }
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+    }
+    .footer-copy {
+      font-size: 0.72rem;
+      color: rgba(245,240,232,0.3);
+      letter-spacing: 0.1em;
+    }
+    .footer-web a {
+      font-size: 0.78rem;
+      color: rgba(200,181,96,0.6);
+      text-decoration: none;
+      letter-spacing: 0.15em;
+      transition: color 0.2s;
+    }
+    .footer-web a:hover { color: var(--accent); }
+
+    /* ── ANIMATIONS ───────────────────────────── */
+    .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ───────────────────────────── */
+    @media (max-width: 1024px) {
+      #hero, #about, #contact { grid-template-columns: 1fr; }
+      .hero-right { border-left: none; border-top: 1px solid rgba(200,181,96,0.15); }
+      .about-image-side { display: none; }
+      #mission { grid-template-columns: 1fr; gap: 3rem; }
+      .obj-grid { grid-template-columns: repeat(2,1fr); }
+      .team-grid { grid-template-columns: repeat(3,1fr); }
+      nav { padding: 1.2rem 2rem; }
+      .nav-links { gap: 1.5rem; }
+    }
+    @media (max-width: 600px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero-left { padding: 6rem 2rem 3rem; }
+      .hero-right { padding: 3rem 2rem; }
+      #about, #mission, #objectives, #team, #contact { padding: 5rem 1.5rem; }
+      .obj-grid, .team-grid { grid-template-columns: 1fr; }
+      .obj-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">CROC</div>
+    <ul class="nav-links">
+      <li><a href="#about">Nosotros</a></li>
+      <li><a href="#mission">Misión</a></li>
+      <li><a href="#objectives">Objetivos</a></li>
+      <li><a href="#team">Equipo</a></li>
+      <li><a href="#contact">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Sydney, Australia · Est. 2020</p>
+      <h1 class="hero-title">
+        Creative<br>
+        Retail &amp;<br>
+        <span>Operation</span>
+        Construction
+      </h1>
+      <p class="hero-desc">
+        Desarrolladora inmobiliaria especializada en el diseño, construcción,
+        comercialización y operación de proyectos comerciales y de usos mixtos
+        de alta calidad en zonas metropolitanas.
+      </p>
+      <a href="#about" class="hero-cta">Conocer más</a>
+    </div>
+    <div class="hero-right">
+      <div class="hero-stat-grid">
+        <div class="stat-item">
+          <div class="stat-num">2020</div>
+          <div class="stat-label">Año de fundación</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">9+</div>
+          <div class="stat-label">Directores</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">AU</div>
+          <div class="stat-label">Sede Sydney</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">8</div>
+          <div class="stat-label">Objetivos estratégicos</div>
+        </div>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-location">
+        Oficina Corporativa
+        <strong>P. Sherman, 42 Wallaby Way, Sydney, Australia</strong>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-image-side">
+      <div class="about-big-letter">C</div>
+      <div class="about-card fade-in">
+        <p>"Proyectos que integran innovación, funcionalidad y valor a largo plazo."</p>
+        <div class="year">2020</div>
+      </div>
+    </div>
+    <div class="about-text-side">
+      <p class="section-label">Descripción</p>
+      <h2 class="section-title fade-in">Quiénes<br>Somos</h2>
+      <p class="fade-in">
+        Fundada en 2020 y con sede en Sydney, Australia, CROC (Creative Retail and
+        Operation Construction) es una empresa desarrolladora dedicada al diseño,
+        construcción, comercialización y operación de proyectos inmobiliarios
+        comerciales y de usos mixtos.
+      </p>
+      <p class="fade-in" style="margin-top:1rem">
+        Nos especializamos en crear desarrollos que generen valor a largo plazo
+        y maximicen el retorno de inversión, funcionando como elementos de
+        transformación positiva en su entorno. Incorporamos criterios socioambientales
+        desde la concepción de cada proyecto y mantenemos un diálogo constante
+        con los actores involucrados.
+      </p>
+    </div>
+  </section>
+
+  <!-- MISSION / VISION -->
+  <section id="mission">
+    <div class="mv-card fade-in">
+      <p class="section-label">Misión</p>
+      <h2 class="section-title">Misión</h2>
+      <p>
+        Desarrollar, diseñar y construir complejos comerciales innovadores que
+        impulsen el crecimiento económico y la transformación urbana, mediante
+        proyectos de alta calidad arquitectónica, eficiencia constructiva y
+        operación sostenible.
+      </p>
+      <div class="mv-separator"></div>
+    </div>
+    <div class="mv-card fade-in">
+      <p class="section-label">Visión</p>
+      <h2 class="section-title">Visión</h2>
+      <p>
+        Transformar áreas urbanas selectas en zonas metropolitanas a nivel
+        internacional a través de la construcción, el desarrollo, el diseño y
+        renovación de inmuebles comerciales, de oficinas y de usos mixtos,
+        expandiendo nuestro portafolio y generando valor a todos nuestros
+        grupos de interés.
+      </p>
+      <div class="mv-separator"></div>
+    </div>
+  </section>
+
+  <!-- OBJECTIVES -->
+  <section id="objectives">
+    <div class="obj-header fade-in">
+      <div>
+        <p class="section-label">Estrategia</p>
+        <h2 class="section-title">Objetivos<br>Estratégicos</h2>
+      </div>
+      <p style="max-width:35ch; font-size:0.9rem; line-height:1.7; color:rgba(245,240,232,0.45);">
+        Diseñar, desarrollar y gestionar centros comerciales y espacios públicos
+        integrados que funcionen como nodos urbanos activos en Sídney.
+      </p>
+    </div>
+    <div class="obj-grid">
+      <div class="obj-item fade-in">
+        <div class="obj-num">01</div>
+        <div class="obj-title">Integración Urbano-Comercial</div>
+        <p class="obj-text">Proyectos que combinen espacio público y comercio, generando centralidades urbanas activas y accesibles.</p>
+      </div>
+      <div class="obj-item fade-in">
+        <div class="obj-num">02</div>
+        <div class="obj-title">Sostenibilidad Ambiental</div>
+        <p class="obj-text">Diseño bioclimático, uso eficiente de recursos y espacios verdes que mejoren el microclima urbano.</p>
+      </div>
+      <div class="obj-item fade-in">
+        <div class="obj-num">03</div>
+        <div class="obj-title">Activación del Espacio</div>
+        <p class="obj-text">Plazas, corredores peatonales y áreas recreativas vinculadas a los desarrollos comerciales.</p>
+      </div>
+      <div class="obj-item fade-in">
+        <div class="obj-num">04</div>
+        <div class="obj-title">Rentabilidad y Valor</div>
+        <p class="obj-text">Viabilidad económica mediante planeación estratégica, atracción de marcas clave y diversificación de usos.</p>
+      </div>
+      <div class="obj-item fade-in">
+        <div class="obj-num">05</div>
+        <div class="obj-title">Movilidad y Accesibilidad</div>
+        <p class="obj-text">Priorizar acceso peatonal, ciclista y de transporte público, reduciendo dependencia del automóvil.</p>
+      </div>
+      <div class="obj-item fade-in">
+        <div class="obj-num">06</div>
+        <div class="obj-title">Identidad Arquitectónica</div>
+        <p class="obj-text">Proyectos con identidad propia que responden al contexto cultural y urbano de Sídney.</p>
+      </div>
+      <div class="obj-item fade-in">
+        <div class="obj-num">07</div>
+        <div class="obj-title">Usos Mixtos</div>
+        <p class="obj-text">Programas complementarios (oficinas, vivienda, entretenimiento) para espacios activos todo el día.</p>
+      </div>
+      <div class="obj-item fade-in">
+        <div class="obj-num">08</div>
+        <div class="obj-title">Innovación Tecnológica</div>
+        <p class="obj-text">Smart buildings, gestión energética inteligente y experiencia digital del usuario integrada.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section id="team">
+    <div class="team-header fade-in">
+      <p class="section-label">Dirección</p>
+      <h2 class="section-title">Equipo<br>Directivo</h2>
+    </div>
+    <div class="team-grid">
+      <div class="team-member fade-in">
+        <div class="member-avatar">SA</div>
+        <div class="member-name">Soarly Aguilera</div>
+        <div class="member-role">Directora General</div>
+      </div>
+      <div class="team-member fade-in">
+        <div class="member-avatar">MO</div>
+        <div class="member-name">Monserrat Ocampo</div>
+        <div class="member-role">Directora de Desarrollo Inmobiliario</div>
+      </div>
+      <div class="team-member fade-in">
+        <div class="member-avatar">YL</div>
+        <div class="member-name">Yael López</div>
+        <div class="member-role">Director Jurídico</div>
+      </div>
+      <div class="team-member fade-in">
+        <div class="member-avatar">AM</div>
+        <div class="member-name">Abdiel Morán</div>
+        <div class="member-role">Director de Diseño</div>
+      </div>
+      <div class="team-member fade-in">
+        <div class="member-avatar">KS</div>
+        <div class="member-name">Karen Salazar</div>
+        <div class="member-role">Directora de Finanzas</div>
+      </div>
+      <div class="team-member fade-in">
+        <div class="member-avatar">ED</div>
+        <div class="member-name">Edwin Durán</div>
+        <div class="member-role">Director de Construcción</div>
+      </div>
+      <div class="team-member fade-in">
+        <div class="member-avatar">MR</div>
+        <div class="member-name">Mara Rentería</div>
+        <div class="member-role">Directora de Supervisión</div>
+      </div>
+      <div class="team-member fade-in">
+        <div class="member-avatar">GM</div>
+        <div class="member-name">Georgina Martínez</div>
+        <div class="member-role">Directora de Operación</div>
+      </div>
+      <div class="team-member fade-in">
+        <div class="member-avatar">RA</div>
+        <div class="member-name">Roberto Ávalos</div>
+        <div class="member-role">Director de Comercio</div>
+      </div>
+      <div class="team-member fade-in">
+        <div class="member-avatar">AS</div>
+        <div class="member-name">Alan Sanchez</div>
+        <div class="member-role">Director Administrativo</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-left">
+      <p class="section-label">Contacto</p>
+      <h2 class="section-title fade-in">Contáctanos</h2>
+      <div class="contact-item fade-in">
+        <div class="contact-item-label">Dirección</div>
+        <div class="contact-item-val">P. Sherman, 42 Wallaby Way<br>Sydney, Australia</div>
+      </div>
+      <div class="contact-item fade-in">
+        <div class="contact-item-label">Sitio Web</div>
+        <div class="contact-item-val"><a href="https://www.croc.com.au">www.croc.com.au</a></div>
+      </div>
+      <div class="contact-item fade-in">
+        <div class="contact-item-label">Correos Electrónicos</div>
+        <div class="contact-item-val" style="font-size:0.8rem; display:grid; grid-template-columns:1fr 1fr; gap:0.3rem 1rem;">
+          <a href="mailto:saocampome@croc.com.au">saocampome@croc.com.au</a>
+          <a href="mailto:magemargo@croc.com.au">magemargo@croc.com.au</a>
+          <a href="mailto:maferenteriavi@croc.com.au">maferenteriavi@croc.com.au</a>
+          <a href="mailto:sograguileraar@croc.com.au">sograguileraar@croc.com.au</a>
+          <a href="mailto:yaallopezce@croc.com.au">yaallopezce@croc.com.au</a>
+          <a href="mailto:rocaavalosre@croc.com.au">rocaavalosre@croc.com.au</a>
+          <a href="mailto:abmorango@croc.com.au">abmorango@croc.com.au</a>
+          <a href="mailto:edladuranla@croc.com.au">edladuranla@croc.com.au</a>
+          <a href="mailto:kalisalazarse@croc.com.au">kalisalazarse@croc.com.au</a>
+        </div>
+      </div>
+    </div>
+    <div class="contact-right fade-in">
+      <p class="section-label">Teléfonos</p>
+      <h3 class="section-title" style="font-size:2.5rem; margin-bottom:0.5rem;">Líneas<br>Directas</h3>
+      <div class="phones-grid">
+        <div class="phone-card">
+          <div class="phone-dept">Oficina Central</div>
+          <div class="phone-num">+61 2 8456 2140</div>
+        </div>
+        <div class="phone-card">
+          <div class="phone-dept">Atención a Clientes</div>
+          <div class="phone-num">+61 2 8456 2145</div>
+        </div>
+        <div class="phone-card">
+          <div class="phone-dept">Relaciones con Inversionistas</div>
+          <div class="phone-num">+61 2 8456 2150</div>
+        </div>
+        <div class="phone-card">
+          <div class="phone-dept">Proveedores y Contratistas</div>
+          <div class="phone-num">+61 2 8456 2155</div>
+        </div>
+        <div class="phone-card" style="grid-column: span 2;">
+          <div class="phone-dept">Departamento de Proyectos</div>
+          <div class="phone-num">+61 2 8456 2160</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">CROC</div>
+    <div class="footer-copy">© 2025 Creative Retail & Operation Construction · Sydney, Australia</div>
+    <div class="footer-web"><a href="https://www.croc.com.au">www.croc.com.au</a></div>
+  </footer>
+
+  <script>
+    // Scroll-triggered fade-in
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
